@@ -1,0 +1,31 @@
+\documentclass[10pt]{extarticle}
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+\algtext*{EndWhile}% Remove "end while" text
+\algtext*{EndIf}% Remove "end if" text
+\algtext*{EndFunction}% Remove "end function" text
+\MakeRobust{\Call}
+
+\begin{document}
+
+\begin{algorithmic}
+\Function{SimulatedAnnealingMin}{$ $}
+\State $T\gets T_{max}$
+\State $best\gets$ \textbf{\Call{\color{blue}INIT}{$ $}}
+
+\While{$T>T_{min}$}
+	\State $next\gets $ \textbf{\Call{\color{blue}NEIGHBOUR}{$T, best$}}
+	\State $\Delta E\gets$ \textbf{\Call{\color{blue}ENERGY}{$next$}} $-$ \textbf{\Call{\color{blue}ENERGY}{$best$}}
+	\If{$\Delta E < 0$}
+      \State $best\gets next$
+	\ElsIf{\Call{random}{$ $} $<$ \textbf{\Call{\color{blue}ACCEPT}{$T,\Delta E$}}}
+		\State $best\gets next$
+	\EndIf
+	\State $T\gets$ \textbf{\Call{\color{blue}COOLING}{$T,best$}}
+\EndWhile
+\Return $best$
+\EndFunction
+\end{algorithmic}
+
+\end{document}​
